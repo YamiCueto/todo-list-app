@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:coverage": "jest --coverage --color --reporters=default --reporters=jest-html-reporters"
+    "test:coverage": "jest --coverage --color --reporters=default --reporters=jest-html-reporters",
+    "deploy": "ng build --configuration production --output-path docs --base-href /todo-list-app/ && mv docs/index.html docs/404.html"
   },
   "private": true,
   "dependencies": {
