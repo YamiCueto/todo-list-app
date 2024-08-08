@@ -1,1 +1,6 @@
-<p>add-todo works!</p>
+<div>
+  <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+    <input formControlName="title" placeholder="Add new todo">
+    <button type="submit">Add</button>
+  </form>
+</div>

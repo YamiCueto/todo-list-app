@@ -9,38 +9,60 @@ describe('TodoService', () => {
     service = TestBed.inject(TodoService);
   });
 
-  it('should be created', () => {
+  test('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should add a new todo', () => {
+  test('should add a new todo', () => {
     service.addTodo('Test Todo');
-    service.getTodos().subscribe(todos => {
+    service.getTodos().subscribe((todos) => {
       expect(todos.length).toBe(1);
       expect(todos[0].title).toBe('Test Todo');
+      expect(todos[0].completed).toBe(false);
     });
   });
 
-  it('should edit a todo', () => {
+  test('should edit a todo', () => {
     service.addTodo('Test Todo');
     service.editTodo(1, 'Updated Todo');
-    service.getTodos().subscribe(todos => {
+    service.getTodos().subscribe((todos) => {
       expect(todos[0].title).toBe('Updated Todo');
     });
   });
 
-  it('should toggle todo completion', () => {
+  test('should not edit a non-existing todo', () => {
+    service.editTodo(999, 'Non-Existent Todo');
+    service.getTodos().subscribe((todos) => {
+      expect(todos.length).toBe(0);
+    });
+  });
+
+  test('should toggle todo completion', () => {
     service.addTodo('Test Todo');
     service.toggleTodoCompletion(1);
-    service.getTodos().subscribe(todos => {
+    service.getTodos().subscribe((todos) => {
       expect(todos[0].completed).toBe(true);
     });
   });
 
-  it('should delete a todo', () => {
+  test('should not toggle completion of non-existing todo', () => {
+    service.toggleTodoCompletion(999);
+    service.getTodos().subscribe((todos) => {
+      expect(todos.length).toBe(0);
+    });
+  });
+
+  test('should delete a todo', () => {
     service.addTodo('Test Todo');
     service.deleteTodo(1);
-    service.getTodos().subscribe(todos => {
+    service.getTodos().subscribe((todos) => {
+      expect(todos.length).toBe(0);
+    });
+  });
+
+  test('should not delete a non-existing todo', () => {
+    service.deleteTodo(999);
+    service.getTodos().subscribe((todos) => {
       expect(todos.length).toBe(0);
     });
   });

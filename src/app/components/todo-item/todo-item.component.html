@@ -1,1 +1,5 @@
-<p>todo-item works!</p>
+<div>
+  <input type="checkbox" [checked]="todo.completed" (change)="toggleCompletion()">
+  <span [ngClass]="{ completed: todo.completed }">{{ todo.title }}</span>
+  <button (click)="deleteTodo()">Delete</button>
+</div>
