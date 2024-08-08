@@ -1,7 +1,5 @@
 <mat-list-item>
   <mat-checkbox [checked]="todo.completed" (change)="toggleCompletion()"></mat-checkbox>
   <span [ngClass]="{ completed: todo.completed }">{{ todo.title }}</span>
-  <button mat-icon-button color="warn" (click)="deleteTodo()">
-    <mat-icon>delete</mat-icon>
-  </button>
+  <button class="delete-button" (click)="deleteTodo()">Delete</button>
 </mat-list-item>

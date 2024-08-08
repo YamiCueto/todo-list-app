@@ -9,3 +9,13 @@ mat-list-item {
   text-decoration: line-through;
   color: gray;
 }
+
+.delete-button {
+  background-color: #ff4d4d; /* Color rojo */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Borde redondeado */
+  padding: 5px 10px; /* Espaciado interno */
+  cursor: pointer; /* Cambiar el cursor a un puntero */
+  transition: background-color 0.3s ease; /* Animación suave */
+}
