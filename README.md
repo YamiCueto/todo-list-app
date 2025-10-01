@@ -195,6 +195,12 @@ La aplicación cuenta con **3 pestañas principales** en la navegación inferior
 - **Perfil de usuario**: Información personal
 - **Gestión de datos**: Exportar/importar configuración
 
+## 🌐 Demo en Vivo
+
+🚀 **Aplicación desplegada**: [https://yamicueto.github.io/todo-list-app/](https://yamicueto.github.io/todo-list-app/)
+
+La aplicación se despliega automáticamente en GitHub Pages cada vez que se actualiza la rama `main`.
+
 ## 🔧 Instalación y Desarrollo
 
 ### Prerrequisitos
@@ -220,7 +226,11 @@ npm start
 # Desarrollo
 npm start                 # Servidor de desarrollo (puerto 4200)
 npm run build            # Construcción para producción
+npm run build:prod       # Construcción para producción optimizada
 npm run build:dev        # Construcción para desarrollo
+
+# Despliegue
+npm run deploy           # Construcción y despliegue manual a GitHub Pages
 
 # Testing
 npm test                 # Pruebas unitarias
@@ -231,6 +241,15 @@ npm run e2e              # Pruebas end-to-end
 npm run lint             # Verificación de código
 npm run analyze          # Análisis de bundle
 ```
+
+### 🚀 Despliegue Automático
+
+La aplicación cuenta con **GitHub Actions** configurado para despliegue automático:
+
+- **Trigger**: Push a la rama `main`
+- **Proceso**: Build automático → Despliegue a GitHub Pages
+- **URL**: [https://yamicueto.github.io/todo-list-app/](https://yamicueto.github.io/todo-list-app/)
+- **Tiempo**: ~2-3 minutos desde el commit
 
 ## 🛠️ Tecnologías Utilizadas
 
