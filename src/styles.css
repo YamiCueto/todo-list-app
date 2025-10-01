@@ -1,30 +1,163 @@
+/* Importar Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* Estilo general para la aplicación */
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
+* {
   box-sizing: border-box;
-  background-color: #f5f5f5;
 }
 
-/* Contenedor principal */
+body {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(108, 117, 125, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(73, 80, 87, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 40% 70%, rgba(102, 126, 234, 0.1) 0%, transparent 30%);
+  pointer-events: none;
+  z-index: -2;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(45deg, transparent 30%, rgba(108, 117, 125, 0.02) 50%, transparent 70%),
+    linear-gradient(-45deg, transparent 30%, rgba(108, 117, 125, 0.02) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}/* Contenedor principal */
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile First Responsive Design */
+@media (max-width: 767px) {
+  .app-container {
+    padding: 12px 8px 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .app-container {
+    padding: 24px 16px 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-container {
+    padding: 40px 20px 20px;
+  }
 }
 
 /* Footer */
 footer.footer {
-  margin-top: 10dvh;
+  margin-top: auto;
+  padding: 20px;
   text-align: center;
-  background-color: #f8f9fa;
+  background: rgba(248, 249, 250, 0.9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   color: #6c757d;
   font-size: 14px;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid rgba(222, 226, 230, 0.8);
+  border-radius: 12px 12px 0 0;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: 500;
+}
+
+/* Material Design Customizations */
+.mat-mdc-button-touch-target {
+  width: 100%;
+  height: 100%;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0 2px 2px 0 rgba(0, 0, 0, 0.14),
+              0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.mat-mdc-form-field {
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+.mat-mdc-form-field .mat-mdc-floating-label {
+  font-weight: 500;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Animaciones globales */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Focus visible para accesibilidad */
+.mat-mdc-button:focus-visible,
+.mat-mdc-icon-button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+/* Tooltips mejorados */
+.mat-mdc-tooltip {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 /* Estilos responsivos */

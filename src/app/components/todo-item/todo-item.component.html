@@ -1,5 +1,89 @@
-<mat-list-item>
-  <mat-checkbox [checked]="todo.completed" (change)="toggleCompletion()"></mat-checkbox>
-  <span [ngClass]="{ completed: todo.completed }">{{ todo.title }}</span>
-  <button class="delete-button" (click)="deleteTodo()">Delete</button>
-</mat-list-item>
+<div class="todo-item-container" [ngClass]="{ 'completed': todo.completed, 'editing': isEditing }">
+  <mat-list-item class="todo-item">
+    <!-- Checkbox -->
+    <div class="checkbox-container">
+      <mat-checkbox
+        [checked]="todo.completed"
+        (change)="toggleCompletion()"
+        [disabled]="isEditing"
+        color="primary">
+      </mat-checkbox>
+    </div>
+
+    <!-- Display Mode -->
+    <div *ngIf="!isEditing" class="todo-content" [ngClass]="{ completed: todo.completed }">
+      <div class="todo-main">
+        <span class="todo-title" (click)="startEdit()" [title]="'Click to edit'">
+          {{ todo.title }}
+        </span>
+        <div class="todo-meta">
+          <span class="todo-date">
+            <mat-icon class="date-icon">schedule</mat-icon>
+            {{ todo.createdAt | date:'MMM dd, yyyy' }}
+          </span>
+          <span *ngIf="todo.updatedAt && todo.updatedAt !== todo.createdAt" class="todo-updated">
+            <mat-icon class="update-icon">edit</mat-icon>
+            Updated {{ todo.updatedAt | date:'MMM dd' }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Mode -->
+    <div *ngIf="isEditing" class="edit-mode">
+      <mat-form-field appearance="outline" class="edit-field">
+        <mat-label>Edit task</mat-label>
+        <input
+          matInput
+          [(ngModel)]="editTitle"
+          (keydown)="onKeyPress($event)"
+          maxlength="100"
+          placeholder="Edit your task..."
+          #editInput
+          autocomplete="off">
+        <mat-hint>Press Enter to save, Esc to cancel</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!-- Actions -->
+    <div class="todo-actions">
+      <div *ngIf="isEditing" class="edit-actions">
+        <button
+          mat-mini-fab
+          color="primary"
+          (click)="saveEdit()"
+          [disabled]="!editTitle.trim()"
+          matTooltip="Save changes"
+          class="action-btn save-btn">
+          <mat-icon>check</mat-icon>
+        </button>
+        <button
+          mat-mini-fab
+          (click)="cancelEdit()"
+          matTooltip="Cancel editing"
+          class="action-btn cancel-btn">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="!isEditing" class="view-actions">
+        <button
+          mat-icon-button
+          (click)="startEdit()"
+          [disabled]="todo.completed"
+          matTooltip="Edit task"
+          class="action-btn edit-btn">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="deleteTodo()"
+          matTooltip="Delete task"
+          class="action-btn delete-btn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-list-item>
+</div>

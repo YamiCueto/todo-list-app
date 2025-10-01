@@ -1,0 +1,265 @@
+.calendar-container {
+  padding: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-bottom: 100px; /* Space for bottom nav */
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.month-navigation {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.month-year {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #495057;
+  min-width: 180px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.calendar-grid {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.weekday {
+  padding: 12px 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+  position: relative;
+  min-height: 60px;
+  border-bottom: 1px solid #f1f3f4;
+  border-right: 1px solid #f1f3f4;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-day:nth-child(7n) {
+  border-right: none;
+}
+
+.calendar-day:hover {
+  background: rgba(0, 123, 255, 0.05);
+}
+
+.calendar-day.other-month {
+  color: #adb5bd;
+  background: #fafbfc;
+}
+
+.calendar-day.today {
+  background: rgba(0, 123, 255, 0.1);
+  border: 2px solid #007bff;
+}
+
+.calendar-day.selected {
+  background: #007bff;
+  color: white;
+}
+
+.calendar-day.has-todos {
+  background: rgba(40, 167, 69, 0.05);
+}
+
+.calendar-day.has-todos.selected {
+  background: #007bff;
+}
+
+.day-number {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.todo-indicator {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #28a745;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.selected-date-tasks {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.selected-date-tasks h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.no-tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  text-align: center;
+}
+
+.no-tasks mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+  color: #dee2e6;
+}
+
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-status {
+  width: 4px;
+  height: 40px;
+  border-radius: 2px;
+  margin-top: 4px;
+}
+
+.task-status.status-pending {
+  background: #6c757d;
+}
+
+.task-status.status-in_progress {
+  background: #fd7e14;
+}
+
+.task-status.status-completed {
+  background: #28a745;
+}
+
+.task-status.status-suspended {
+  background: #ffc107;
+}
+
+.task-content {
+  flex: 1;
+}
+
+.task-content h4 {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #212529;
+}
+
+.task-content p {
+  margin: 0 0 8px 0;
+  font-size: 0.85rem;
+  color: #6c757d;
+  line-height: 1.4;
+}
+
+.task-time {
+  font-size: 0.75rem;
+  color: #adb5bd;
+}
+
+/* Mobile responsive */
+@media (max-width: 767px) {
+  .calendar-container {
+    padding: 16px;
+  }
+
+  .calendar-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .calendar-header h2 {
+    text-align: center;
+  }
+
+  .month-navigation {
+    justify-content: center;
+  }
+
+  .calendar-day {
+    min-height: 50px;
+    padding: 4px;
+  }
+
+  .day-number {
+    font-size: 0.8rem;
+  }
+
+  .todo-indicator {
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+  }
+
+  .weekday {
+    padding: 8px 4px;
+    font-size: 0.75rem;
+  }
+
+  .selected-date-tasks {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,10 @@
+<div class="bottom-nav">
+  <button
+    *ngFor="let item of navItems"
+    class="nav-item"
+    [class.active]="currentTab === item.id"
+    (click)="onTabClick(item.id)">
+    <mat-icon>{{ item.icon }}</mat-icon>
+    <span>{{ item.label }}</span>
+  </button>
+</div>

@@ -1,0 +1,63 @@
+<div class="calendar-container">
+  <!-- Header -->
+  <div class="calendar-header">
+    <h2>Calendario</h2>
+    <div class="month-navigation">
+      <button mat-icon-button (click)="previousMonth()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <span class="month-year">{{ getMonthName() }}</span>
+      <button mat-icon-button (click)="nextMonth()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Calendar Grid -->
+  <div class="calendar-grid">
+    <!-- Days of week -->
+    <div class="calendar-weekdays">
+      <div class="weekday">Dom</div>
+      <div class="weekday">Lun</div>
+      <div class="weekday">Mar</div>
+      <div class="weekday">Mié</div>
+      <div class="weekday">Jue</div>
+      <div class="weekday">Vie</div>
+      <div class="weekday">Sáb</div>
+    </div>
+
+    <!-- Calendar days -->
+    <div class="calendar-days">
+      <div
+        *ngFor="let day of calendarDays"
+        class="calendar-day"
+        [class.other-month]="!day.isCurrentMonth"
+        [class.today]="day.isToday"
+        [class.selected]="selectedDate && selectedDate.toDateString() === day.date.toDateString()"
+        [class.has-todos]="day.todoCount > 0"
+        (click)="selectDate(day)">
+        <span class="day-number">{{ day.date.getDate() }}</span>
+        <div *ngIf="day.todoCount > 0" class="todo-indicator">
+          <span class="todo-count">{{ day.todoCount }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Selected date tasks -->
+  <div *ngIf="selectedDate" class="selected-date-tasks">
+    <h3>Tareas para {{ selectedDate | date:'fullDate':'':'es-ES' }}</h3>
+    <div *ngIf="getSelectedDateTodos().length === 0" class="no-tasks">
+      <mat-icon>event_available</mat-icon>
+      <p>No hay tareas para este día</p>
+    </div>
+    <div *ngFor="let todo of getSelectedDateTodos()" class="task-item">
+      <div class="task-status" [ngClass]="'status-' + todo.status"></div>
+      <div class="task-content">
+        <h4>{{ todo.title }}</h4>
+        <p *ngIf="todo.description">{{ todo.description }}</p>
+        <span class="task-time">{{ todo.createdAt | date:'shortTime' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

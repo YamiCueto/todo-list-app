@@ -1,7 +1,146 @@
-<div class="todo-list-container">
-  <h2>Todo List</h2>
-  <app-add-todo></app-add-todo>
-  <mat-list>
-    <app-todo-item *ngFor="let todo of todos" [todo]="todo" (delete)="deleteTodo($event)" (toggle)="toggleCompletion($event)"></app-todo-item>
-  </mat-list>
+<div class="tasks-container">
+  <!-- Header -->
+  <div class="tasks-header">
+    <h1>Tareas</h1>
+    <div class="stats-overview" *ngIf="getTotalTasks() > 0">
+      <div class="stat-card">
+        <span class="stat-number">{{ getTotalTasks() }}</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{{ getPendingTasks() }}</span>
+        <span class="stat-label">Pendientes</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{{ getInProgressTasks() }}</span>
+        <span class="stat-label">En Progreso</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{{ getCompletedTasks() }}</span>
+        <span class="stat-label">Completadas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Cargando tareas...</p>
+  </div>
+
+  <!-- Tasks Content -->
+  <div *ngIf="!isLoading" class="tasks-content">
+    <!-- Empty State -->
+    <div *ngIf="getTotalTasks() === 0" class="empty-state">
+      <div class="empty-icon">
+        <mat-icon>task_alt</mat-icon>
+      </div>
+      <h3>¡Comienza a organizarte!</h3>
+      <p>Agrega tu primera tarea tocando el botón + de abajo</p>
+    </div>
+
+    <!-- Tasks List -->
+    <div *ngIf="getTotalTasks() > 0" class="tasks-list">
+
+      <!-- In Progress Tasks -->
+      <div *ngIf="getInProgressTasks() > 0" class="task-section">
+        <h3 class="section-title">
+          <mat-icon>hourglass_empty</mat-icon>
+          En progreso
+        </h3>
+        <div class="task-card"
+             *ngFor="let task of getTasksByStatus(TodoStatus.IN_PROGRESS)"
+             (click)="onTaskClick(task)">
+          <div class="task-status-indicator" [style.background-color]="getStatusColor(task.status)"></div>
+          <div class="task-content">
+            <h4>{{ task.title }}</h4>
+            <p *ngIf="task.description" class="task-description">{{ task.description }}</p>
+            <div class="task-meta">
+              <span class="task-time">{{ task.createdAt | date:'MMM dd' }}</span>
+              <span class="task-status-badge" [style.color]="getStatusColor(task.status)">
+                {{ getStatusText(task.status) }}
+              </span>
+            </div>
+          </div>
+          <button
+            mat-icon-button
+            class="task-toggle"
+            (click)="$event.stopPropagation(); toggleTaskStatus(task)"
+            [style.color]="getStatusColor(task.status)">
+            <mat-icon>{{ getStatusIcon(task.status) }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pending Tasks -->
+      <div *ngIf="getPendingTasks() > 0" class="task-section">
+        <h3 class="section-title">
+          <mat-icon>radio_button_unchecked</mat-icon>
+          Pendiente por iniciar
+        </h3>
+        <div class="task-card"
+             *ngFor="let task of getTasksByStatus(TodoStatus.PENDING)"
+             (click)="onTaskClick(task)">
+          <div class="task-status-indicator" [style.background-color]="getStatusColor(task.status)"></div>
+          <div class="task-content">
+            <h4>{{ task.title }}</h4>
+            <p *ngIf="task.description" class="task-description">{{ task.description }}</p>
+            <div class="task-meta">
+              <span class="task-time">{{ task.createdAt | date:'MMM dd' }}</span>
+              <span class="task-status-badge" [style.color]="getStatusColor(task.status)">
+                {{ getStatusText(task.status) }}
+              </span>
+            </div>
+          </div>
+          <button
+            mat-icon-button
+            class="task-toggle"
+            (click)="$event.stopPropagation(); toggleTaskStatus(task)"
+            [style.color]="getStatusColor(task.status)">
+            <mat-icon>{{ getStatusIcon(task.status) }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Completed Tasks -->
+      <div *ngIf="getCompletedTasks() > 0" class="task-section">
+        <h3 class="section-title">
+          <mat-icon>check_circle</mat-icon>
+          Terminadas
+        </h3>
+        <div class="task-card completed"
+             *ngFor="let task of getTasksByStatus(TodoStatus.COMPLETED)"
+             (click)="onTaskClick(task)">
+          <div class="task-status-indicator" [style.background-color]="getStatusColor(task.status)"></div>
+          <div class="task-content">
+            <h4>{{ task.title }}</h4>
+            <p *ngIf="task.description" class="task-description">{{ task.description }}</p>
+            <div class="task-meta">
+              <span class="task-time">{{ task.createdAt | date:'MMM dd' }}</span>
+              <span class="task-status-badge" [style.color]="getStatusColor(task.status)">
+                {{ getStatusText(task.status) }}
+              </span>
+            </div>
+          </div>
+          <button
+            mat-icon-button
+            class="task-toggle"
+            (click)="$event.stopPropagation(); toggleTaskStatus(task)"
+            [style.color]="getStatusColor(task.status)">
+            <mat-icon>{{ getStatusIcon(task.status) }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
+
+<!-- Task Detail Modal -->
+<app-task-detail
+  [task]="selectedTask"
+  [isVisible]="showTaskDetail"
+  (close)="onTaskDetailClose()"
+  (save)="onTaskSave($event)"
+  (delete)="onTaskDelete($event)">
+</app-task-detail>

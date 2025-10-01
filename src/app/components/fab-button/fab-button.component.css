@@ -1,0 +1,37 @@
+.fab-button {
+  position: fixed;
+  bottom: 90px; /* Above bottom navigation */
+  right: 20px;
+  z-index: 99;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 123, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.fab-button:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 123, 255, 0.6);
+}
+
+.fab-button mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+/* Mobile responsive */
+@media (max-width: 767px) {
+  .fab-button {
+    bottom: 80px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .fab-button mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}

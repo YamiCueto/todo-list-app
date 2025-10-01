@@ -1,0 +1,129 @@
+<div class="settings-container">
+  <!-- Header -->
+  <div class="settings-header">
+    <h2>Configuración</h2>
+  </div>
+
+  <!-- User Profile Section -->
+  <div class="settings-section">
+    <h3>Perfil de Usuario</h3>
+    <div class="profile-card">
+      <div class="profile-avatar">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <div class="profile-info">
+        <h4>{{ userProfile.name }}</h4>
+        <p>{{ userProfile.email }}</p>
+      </div>
+      <button mat-icon-button class="edit-profile-btn">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Appearance Section -->
+  <div class="settings-section">
+    <h3>Apariencia</h3>
+    <div class="setting-item">
+      <div class="setting-info">
+        <mat-icon>dark_mode</mat-icon>
+        <div class="setting-text">
+          <h4>Modo Oscuro</h4>
+          <p>Cambia la apariencia de la aplicación</p>
+        </div>
+      </div>
+      <mat-slide-toggle
+        [checked]="isDarkMode"
+        (change)="toggleDarkMode()"
+        color="primary">
+      </mat-slide-toggle>
+    </div>
+  </div>
+
+  <!-- Notifications Section -->
+  <div class="settings-section">
+    <h3>Notificaciones</h3>
+    <div class="setting-item">
+      <div class="setting-info">
+        <mat-icon>notifications</mat-icon>
+        <div class="setting-text">
+          <h4>Notificaciones Push</h4>
+          <p>Recibe recordatorios de tus tareas</p>
+        </div>
+      </div>
+      <mat-slide-toggle
+        [checked]="notifications"
+        (change)="toggleNotifications()"
+        color="primary">
+      </mat-slide-toggle>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <mat-icon>volume_up</mat-icon>
+        <div class="setting-text">
+          <h4>Sonidos</h4>
+          <p>Reproduce sonidos para notificaciones</p>
+        </div>
+      </div>
+      <mat-slide-toggle
+        [checked]="soundEnabled"
+        (change)="toggleSound()"
+        color="primary">
+      </mat-slide-toggle>
+    </div>
+  </div>
+
+  <!-- Data Management Section -->
+  <div class="settings-section">
+    <h3>Gestión de Datos</h3>
+
+    <div class="setting-item clickable" (click)="exportData()">
+      <div class="setting-info">
+        <mat-icon>download</mat-icon>
+        <div class="setting-text">
+          <h4>Exportar Datos</h4>
+          <p>Descarga una copia de tus tareas</p>
+        </div>
+      </div>
+      <mat-icon>chevron_right</mat-icon>
+    </div>
+
+    <div class="setting-item clickable" (click)="importData()">
+      <div class="setting-info">
+        <mat-icon>upload</mat-icon>
+        <div class="setting-text">
+          <h4>Importar Datos</h4>
+          <p>Restaura tus tareas desde un archivo</p>
+        </div>
+      </div>
+      <mat-icon>chevron_right</mat-icon>
+    </div>
+
+    <div class="setting-item clickable danger" (click)="clearAllData()">
+      <div class="setting-info">
+        <mat-icon>delete_forever</mat-icon>
+        <div class="setting-text">
+          <h4>Eliminar Todos los Datos</h4>
+          <p>Borra permanentemente todas las tareas</p>
+        </div>
+      </div>
+      <mat-icon>chevron_right</mat-icon>
+    </div>
+  </div>
+
+  <!-- App Info Section -->
+  <div class="settings-section">
+    <h3>Información de la App</h3>
+    <div class="app-info">
+      <div class="app-logo">
+        <mat-icon>task_alt</mat-icon>
+      </div>
+      <div class="app-details">
+        <h4>Todo List App</h4>
+        <p>Versión 1.0.0</p>
+        <p>Desarrollado con ❤️ por Yamid Cueto</p>
+      </div>
+    </div>
+  </div>
+</div>

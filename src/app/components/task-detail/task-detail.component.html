@@ -1,0 +1,101 @@
+<div class="task-detail-overlay" *ngIf="isVisible" (click)="onClose()">
+  <div class="task-detail-container" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="task-detail-header">
+      <button mat-icon-button (click)="onClose()" class="back-btn">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Detalles de la tarea</h2>
+    </div>
+
+    <!-- Content -->
+    <div class="task-detail-content">
+      <form [formGroup]="taskForm" (ngSubmit)="onSave()">
+        <!-- Title -->
+        <div class="form-group">
+          <label>Título</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="title" placeholder="Diseñar la nueva pantalla de inicio">
+            <mat-error *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+              El título es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label>Descripción</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <textarea
+              matInput
+              formControlName="description"
+              placeholder="Revisar el feedback del usuario y crear un nuevo diseño para la pantalla principal de la aplicación, enfocándose en la simplicidad y el acceso rápido a las funciones clave."
+              rows="4">
+            </textarea>
+          </mat-form-field>
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+          <label>Estado</label>
+          <div class="status-buttons">
+            <button
+              type="button"
+              mat-button
+              class="status-btn"
+              [class.active]="taskForm.get('status')?.value === TodoStatus.PENDING"
+              (click)="taskForm.get('status')?.setValue(TodoStatus.PENDING)">
+              Pendiente
+            </button>
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              class="status-btn"
+              [class.active]="taskForm.get('status')?.value === TodoStatus.IN_PROGRESS"
+              (click)="taskForm.get('status')?.setValue(TodoStatus.IN_PROGRESS)">
+              En progreso
+            </button>
+            <button
+              type="button"
+              mat-button
+              class="status-btn"
+              [class.active]="taskForm.get('status')?.value === TodoStatus.COMPLETED"
+              (click)="taskForm.get('status')?.setValue(TodoStatus.COMPLETED)">
+              Completado
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Actions -->
+    <div class="task-detail-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSave()"
+        [disabled]="!taskForm.valid"
+        class="save-btn">
+        Guardar cambios
+      </button>
+
+      <button
+        mat-stroked-button
+        (click)="onClose()"
+        class="secondary-btn"
+        *ngIf="task">
+        Editar tarea
+      </button>
+
+      <button
+        mat-button
+        color="warn"
+        (click)="onDelete()"
+        class="delete-btn"
+        *ngIf="task">
+        Eliminar tarea
+      </button>
+    </div>
+  </div>
+</div>

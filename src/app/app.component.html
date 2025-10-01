@@ -1,6 +1,37 @@
 <div class="app-container">
-  <app-todo-list></app-todo-list>
-  <footer class="footer">
-    Made with love by Yamid Cueto. All rights reserved.
-  </footer>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Tasks Tab -->
+    <div *ngIf="currentTab === 'tasks'" class="tab-content">
+      <app-todo-list></app-todo-list>
+    </div>
+
+    <!-- Calendar Tab -->
+    <div *ngIf="currentTab === 'calendar'" class="tab-content">
+      <app-calendar></app-calendar>
+    </div>
+
+    <!-- Settings Tab -->
+    <div *ngIf="currentTab === 'settings'" class="tab-content">
+      <app-settings></app-settings>
+    </div>
+  </main>
+
+  <!-- Floating Action Button -->
+  <app-fab-button
+    *ngIf="currentTab === 'tasks'"
+    (click)="onFabClick()">
+  </app-fab-button>
+
+  <!-- Bottom Navigation -->
+  <app-bottom-nav (tabChanged)="onTabChanged($event)"></app-bottom-nav>
 </div>
+
+<!-- Task Detail Modal for New/Edit Task -->
+<app-task-detail
+  *ngIf="showNewTaskModal"
+  [task]="null"
+  [isVisible]="showNewTaskModal"
+  (close)="onNewTaskModalClose()"
+  (save)="onNewTaskSave($event)">
+</app-task-detail>
