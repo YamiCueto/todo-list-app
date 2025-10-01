@@ -265,7 +265,7 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.m
 ## 👨‍💻 Autor
 
 **Yamid Cueto**
-- Email: [tu-email@ejemplo.com]
+- Email: [yamidcuetomazo@gmail.com]
 - GitHub: [@YamiCueto](https://github.com/YamiCueto)
 - LinkedIn: [Tu perfil de LinkedIn]
 
