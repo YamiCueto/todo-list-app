@@ -20,6 +20,22 @@
   height: 28px;
 }
 
+/* Desktop styles */
+@media (min-width: 768px) {
+  .fab-button {
+    bottom: 30px;
+    right: 30px;
+    width: 64px;
+    height: 64px;
+  }
+  
+  .fab-button mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
 /* Mobile responsive */
 @media (max-width: 767px) {
   .fab-button {

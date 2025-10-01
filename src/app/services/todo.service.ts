@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { NotificationService } from './notification.service';
 
 export enum TodoStatus {
   PENDING = 'pending',
@@ -35,7 +36,7 @@ export class TodoService {
   private nextId = 1;
   private readonly STORAGE_KEY = 'todo-list-app-todos';
 
-  constructor() {
+  constructor(private notificationService: NotificationService) {
     this.loadTodosFromStorage();
   }
 
@@ -119,8 +120,13 @@ export class TodoService {
       this.todos.push(newTodo);
       this.saveTodosToStorage();
       this.todosSubject.next(this.todos);
+
+      // Mostrar notificación de éxito
+      this.notificationService.showSuccess('¡Tarea creada!', `"${title.trim()}" se ha agregado correctamente`);
+
       return { success: true };
     } catch (error) {
+      this.notificationService.showError('Error', 'No se pudo crear la tarea');
       return { success: false, error: 'Failed to add todo' };
     }
   }
@@ -147,8 +153,13 @@ export class TodoService {
       todo.updatedAt = new Date();
       this.saveTodosToStorage();
       this.todosSubject.next(this.todos);
+
+      // Mostrar notificación de éxito
+      this.notificationService.showSuccess('¡Tarea actualizada!', `"${title.trim()}" se ha modificado correctamente`);
+
       return { success: true };
     } catch (error) {
+      this.notificationService.showError('Error', 'No se pudo actualizar la tarea');
       return { success: false, error: 'Failed to edit todo' };
     }
   }
@@ -206,17 +217,24 @@ export class TodoService {
 
   deleteTodo(id: number): { success: boolean; error?: string } {
     try {
+      const todo = this.todos.find(t => t.id === id);
       const initialLength = this.todos.length;
       this.todos = this.todos.filter(t => t.id !== id);
 
       if (this.todos.length === initialLength) {
+        this.notificationService.showError('Error', 'No se pudo encontrar la tarea');
         return { success: false, error: 'Todo not found' };
       }
 
       this.saveTodosToStorage();
       this.todosSubject.next(this.todos);
+
+      // Mostrar notificación de éxito
+      this.notificationService.showSuccess('¡Tarea eliminada!', todo ? `"${todo.title}" se ha eliminado correctamente` : 'La tarea se ha eliminado');
+
       return { success: true };
     } catch (error) {
+      this.notificationService.showError('Error', 'No se pudo eliminar la tarea');
       return { success: false, error: 'Failed to delete todo' };
     }
   }

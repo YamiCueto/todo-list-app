@@ -214,3 +214,35 @@ mat-list-item {
 button {
   margin-left: 10px;
 }
+
+/* SweetAlert2 Custom Styles */
+.swal2-popup {
+  border-radius: 16px !important;
+  font-family: 'Inter', 'Roboto', sans-serif !important;
+}
+
+.swal2-title {
+  font-weight: 600 !important;
+  color: #212529 !important;
+}
+
+.swal2-content {
+  color: #6c757d !important;
+}
+
+.swal2-confirm {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  padding: 10px 24px !important;
+}
+
+.swal2-cancel {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  padding: 10px 24px !important;
+}
+
+/* Toast notifications positioning */
+.swal2-toast {
+  margin-top: 20px !important;
+}

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Todo, TodoStatus } from '../../services/todo.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-task-detail',
@@ -18,7 +19,7 @@ export class TaskDetailComponent {
   taskForm: FormGroup;
   TodoStatus = TodoStatus;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private notificationService: NotificationService) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.maxLength(500)]],
@@ -74,7 +75,14 @@ export class TaskDetailComponent {
 
   onDelete() {
     if (this.task) {
-      this.delete.emit(this.task.id);
+      this.notificationService.confirmDelete(
+        '¿Eliminar tarea?',
+        `¿Estás seguro de que quieres eliminar "${this.task.title}"? Esta acción no se puede deshacer.`
+      ).then((result) => {
+        if (result.isConfirmed && this.task) {
+          this.delete.emit(this.task.id);
+        }
+      });
     }
   }
 

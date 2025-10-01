@@ -15,7 +15,7 @@
         <div class="form-group">
           <label>Título</label>
           <mat-form-field appearance="outline" class="full-width">
-            <input matInput formControlName="title" placeholder="Diseñar la nueva pantalla de inicio">
+            <input matInput formControlName="title" placeholder="Nombre de la tarea" maxlength="100" />
             <mat-error *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
               El título es requerido
             </mat-error>
@@ -29,7 +29,7 @@
             <textarea
               matInput
               formControlName="description"
-              placeholder="Revisar el feedback del usuario y crear un nuevo diseño para la pantalla principal de la aplicación, enfocándose en la simplicidad y el acceso rápido a las funciones clave."
+              placeholder="Detalles adicionales de la tarea"
               rows="4">
             </textarea>
           </mat-form-field>
