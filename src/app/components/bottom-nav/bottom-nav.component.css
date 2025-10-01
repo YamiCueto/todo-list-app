@@ -3,18 +3,22 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: white;
-  border-top: 1px solid #e9ecef;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-primary);
   display: flex;
   padding: 8px 0 max(8px, env(safe-area-inset-bottom));
   z-index: 100;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Ocultar navegación en desktop */
+/* Ajustes para desktop - mantener visible pero con mejor espaciado */
 @media (min-width: 768px) {
   .bottom-nav {
-    display: none;
+    padding: 12px 0;
+    max-width: 800px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 16px 16px 0 0;
   }
 }
 
@@ -27,7 +31,7 @@
   padding: 8px 12px;
   border: none;
   background: none;
-  color: #6c757d;
+  color: var(--text-secondary);
   transition: all 0.2s ease;
   cursor: pointer;
   gap: 4px;
@@ -47,18 +51,18 @@
 }
 
 .nav-item.active {
-  color: #007bff;
+  color: var(--primary-color);
   transform: translateY(-2px);
 }
 
 .nav-item.active mat-icon {
-  color: #007bff;
+  color: var(--primary-color);
   transform: scale(1.1);
 }
 
 .nav-item:hover:not(.active) {
-  color: #495057;
-  background: rgba(0, 123, 255, 0.05);
+  color: var(--text-primary);
+  background: var(--primary-bg, rgba(77, 171, 247, 0.05));
 }
 
 /* Responsive */

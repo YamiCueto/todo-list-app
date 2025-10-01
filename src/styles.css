@@ -1,6 +1,9 @@
 /* Importar Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Importar temas */
+@import './themes.css';
+
 /* Estilo general para la aplicación */
 * {
   box-sizing: border-box;
@@ -10,10 +13,11 @@ body {
   font-family: 'Inter', 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+  background: var(--bg-primary);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  transition: background-color 0.3s ease;
 }
 
 body::before {

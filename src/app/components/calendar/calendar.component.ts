@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Todo, TodoService } from '../../services/todo.service';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Todo, TodoService, TodoStatus } from '../../services/todo.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -7,20 +8,27 @@ import { Todo, TodoService } from '../../services/todo.service';
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
   currentDate = new Date();
   selectedDate: Date | null = null;
   calendarDays: any[] = [];
+  private todosSubscription: Subscription = new Subscription();
 
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.todoService.getTodos().subscribe(todos => {
-      this.todos = todos;
+        // Suscribirse a cambios en las tareas para actualización en tiempo real
+    this.todosSubscription = this.todoService.getTodos().subscribe((todos: Todo[]) => {
+      this.todos = todos.filter(todo => todo.status !== TodoStatus.DELETED);
       this.generateCalendar();
+      this.cdr.detectChanges(); // Forzar detección de cambios para actualización inmediata
     });
     this.generateCalendar();
+  }
+
+  ngOnDestroy() {
+    this.todosSubscription.unsubscribe();
   }
 
   generateCalendar() {
@@ -50,6 +58,9 @@ export class CalendarComponent implements OnInit {
 
   getTodosForDate(date: Date): Todo[] {
     return this.todos.filter(todo => {
+      // Filtrar tareas eliminadas y comparar por fecha de creación
+      if (todo.status === TodoStatus.DELETED) return false;
+
       const todoDate = new Date(todo.createdAt);
       return todoDate.toDateString() === date.toDateString();
     });
@@ -71,7 +82,11 @@ export class CalendarComponent implements OnInit {
   }
 
   selectDate(day: any) {
+    // Establecer la fecha seleccionada inmediatamente
     this.selectedDate = day.date;
+
+    // Forzar detección de cambios para actualización visual inmediata
+    this.cdr.detectChanges();
   }
 
   getMonthName(): string {

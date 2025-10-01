@@ -4,18 +4,22 @@
     <h1>Tareas</h1>
     <div class="stats-overview" *ngIf="getTotalTasks() > 0">
       <div class="stat-card">
+        <mat-icon class="stat-icon">assignment</mat-icon>
         <span class="stat-number">{{ getTotalTasks() }}</span>
         <span class="stat-label">Total</span>
       </div>
       <div class="stat-card">
+        <mat-icon class="stat-icon pending">radio_button_unchecked</mat-icon>
         <span class="stat-number">{{ getPendingTasks() }}</span>
         <span class="stat-label">Pendientes</span>
       </div>
       <div class="stat-card">
+        <mat-icon class="stat-icon progress">hourglass_empty</mat-icon>
         <span class="stat-number">{{ getInProgressTasks() }}</span>
         <span class="stat-label">En Progreso</span>
       </div>
       <div class="stat-card">
+        <mat-icon class="stat-icon completed">check_circle</mat-icon>
         <span class="stat-number">{{ getCompletedTasks() }}</span>
         <span class="stat-label">Completadas</span>
       </div>
@@ -33,10 +37,24 @@
     <!-- Empty State -->
     <div *ngIf="getTotalTasks() === 0" class="empty-state">
       <div class="empty-icon">
-        <mat-icon>task_alt</mat-icon>
+        <mat-icon>assignment_add</mat-icon>
       </div>
       <h3>¡Comienza a organizarte!</h3>
-      <p>Agrega tu primera tarea tocando el botón + de abajo</p>
+      <p>Agrega tu primera tarea tocando el botón <mat-icon class="inline-icon">add</mat-icon> de abajo</p>
+      <div class="empty-suggestions">
+        <div class="suggestion-item">
+          <mat-icon>mail</mat-icon>
+          <span>Enviar correo</span>
+        </div>
+        <div class="suggestion-item">
+          <mat-icon>groups</mat-icon>
+          <span>Reunión equipo</span>
+        </div>
+        <div class="suggestion-item">
+          <mat-icon>shopping_cart</mat-icon>
+          <span>Comprar comida</span>
+        </div>
+      </div>
     </div>
 
     <!-- Tasks List -->
@@ -53,10 +71,24 @@
              (click)="onTaskClick(task)">
           <div class="task-status-indicator" [style.background-color]="getStatusColor(task.status)"></div>
           <div class="task-content">
-            <h4>{{ task.title }}</h4>
-            <p *ngIf="task.description" class="task-description">{{ task.description }}</p>
+            <div class="task-header">
+              <div class="task-icon-category">
+                <mat-icon class="category-icon">{{ getCategoryIcon(task.title) }}</mat-icon>
+              </div>
+              <div class="task-info">
+                <h4>{{ task.title }}</h4>
+                <p *ngIf="task.description" class="task-description">{{ task.description }}</p>
+              </div>
+              <div class="task-indicators" *ngIf="getPriorityIcon(task) || getDateIcon(task)">
+                <mat-icon *ngIf="getPriorityIcon(task)" class="priority-icon" [style.color]="'#dc3545'">{{ getPriorityIcon(task) }}</mat-icon>
+                <mat-icon *ngIf="getDateIcon(task)" class="date-icon" [style.color]="getDateColor(task)">{{ getDateIcon(task) }}</mat-icon>
+              </div>
+            </div>
             <div class="task-meta">
               <span class="task-time">{{ task.createdAt | date:'MMM dd' }}</span>
+              <span *ngIf="task.dueDate" class="task-due-date" [style.color]="getDateColor(task)">
+                Vence: {{ task.dueDate | date:'MMM dd' }}
+              </span>
               <span class="task-status-badge" [style.color]="getStatusColor(task.status)">
                 {{ getStatusText(task.status) }}
               </span>
@@ -83,10 +115,24 @@
              (click)="onTaskClick(task)">
           <div class="task-status-indicator" [style.background-color]="getStatusColor(task.status)"></div>
           <div class="task-content">
-            <h4>{{ task.title }}</h4>
-            <p *ngIf="task.description" class="task-description">{{ task.description }}</p>
+            <div class="task-header">
+              <div class="task-icon-category">
+                <mat-icon class="category-icon">{{ getCategoryIcon(task.title) }}</mat-icon>
+              </div>
+              <div class="task-info">
+                <h4>{{ task.title }}</h4>
+                <p *ngIf="task.description" class="task-description">{{ task.description }}</p>
+              </div>
+              <div class="task-indicators" *ngIf="getPriorityIcon(task) || getDateIcon(task)">
+                <mat-icon *ngIf="getPriorityIcon(task)" class="priority-icon" [style.color]="'#dc3545'">{{ getPriorityIcon(task) }}</mat-icon>
+                <mat-icon *ngIf="getDateIcon(task)" class="date-icon" [style.color]="getDateColor(task)">{{ getDateIcon(task) }}</mat-icon>
+              </div>
+            </div>
             <div class="task-meta">
               <span class="task-time">{{ task.createdAt | date:'MMM dd' }}</span>
+              <span *ngIf="task.dueDate" class="task-due-date" [style.color]="getDateColor(task)">
+                Vence: {{ task.dueDate | date:'MMM dd' }}
+              </span>
               <span class="task-status-badge" [style.color]="getStatusColor(task.status)">
                 {{ getStatusText(task.status) }}
               </span>
@@ -113,10 +159,24 @@
              (click)="onTaskClick(task)">
           <div class="task-status-indicator" [style.background-color]="getStatusColor(task.status)"></div>
           <div class="task-content">
-            <h4>{{ task.title }}</h4>
-            <p *ngIf="task.description" class="task-description">{{ task.description }}</p>
+            <div class="task-header">
+              <div class="task-icon-category">
+                <mat-icon class="category-icon completed">{{ getCategoryIcon(task.title) }}</mat-icon>
+              </div>
+              <div class="task-info">
+                <h4>{{ task.title }}</h4>
+                <p *ngIf="task.description" class="task-description">{{ task.description }}</p>
+              </div>
+              <div class="task-indicators" *ngIf="getPriorityIcon(task) || getDateIcon(task)">
+                <mat-icon *ngIf="getPriorityIcon(task)" class="priority-icon completed" [style.color]="'#6c757d'">{{ getPriorityIcon(task) }}</mat-icon>
+                <mat-icon *ngIf="getDateIcon(task)" class="date-icon completed" [style.color]="'#6c757d'">{{ getDateIcon(task) }}</mat-icon>
+              </div>
+            </div>
             <div class="task-meta">
               <span class="task-time">{{ task.createdAt | date:'MMM dd' }}</span>
+              <span *ngIf="task.dueDate" class="task-due-date completed">
+                Vence: {{ task.dueDate | date:'MMM dd' }}
+              </span>
               <span class="task-status-badge" [style.color]="getStatusColor(task.status)">
                 {{ getStatusText(task.status) }}
               </span>

@@ -6,8 +6,12 @@ Una aplicación web moderna y responsive para la gestión eficiente de tareas y 
 
 - **Interfaz Móvil Moderna**: Diseño optimizado para dispositivos móviles con navegación por pestañas
 - **Gestión Completa de Tareas**: Crear, editar, eliminar y cambiar estados de tareas
+- **Sistema de Iconos Inteligente**: Categorización automática con 30+ iconos basados en palabras clave
 - **Estados Avanzados**: Sistema de estados (Pendiente, En Progreso, Completada, Suspendida, Eliminada)
-- **Vista de Calendario**: Organización visual de tareas por fechas
+- **Modo Oscuro/Claro**: Cambio dinámico de tema con persistencia automática
+- **Vista de Calendario Sincronizada**: Organización visual con actualización en tiempo real
+- **Indicadores de Prioridad**: Sistema visual de prioridades con iconos y colores
+- **Notificaciones Elegantes**: Sistema de alertas con SweetAlert2
 - **Configuración Personalizable**: Temas, notificaciones y opciones de usuario
 - **Persistencia Local**: Almacenamiento automático en localStorage
 - **Responsive Design**: Funciona perfectamente en móviles, tablets y desktop
@@ -166,6 +170,39 @@ La aplicación cuenta con **3 pestañas principales** en la navegación inferior
    - **Editar tarea**: Modificar después de guardar
    - **Eliminar tarea**: Eliminar permanentemente
 
+### 🎨 Sistema de Iconos Inteligente
+
+La aplicación cuenta con un **sistema avanzado de categorización automática** que asigna iconos según el contenido de las tareas:
+
+#### 📂 Categorías de Iconos Disponibles:
+- **💼 Trabajo**: reunión, proyecto, presentación, informe, cliente
+- **🎓 Educación**: estudiar, examen, tarea, curso, investigación
+- **🏠 Hogar**: limpieza, compras, cocinar, reparar, jardín
+- **💰 Finanzas**: pagar, factura, presupuesto, banco, dinero
+- **🏥 Salud**: médico, ejercicio, dieta, medicina, cita
+- **🚗 Transporte**: viaje, conducir, gasolina, mantenimiento
+- **👥 Social**: familia, amigos, cita, fiesta, evento
+- **🎯 Metas**: objetivo, meta, logro, desarrollo personal
+- **🛒 Compras**: comprar, mercado, regalo, producto
+- **📞 Comunicación**: llamar, email, mensaje, contactar
+
+#### 🎯 Indicadores de Prioridad:
+- **🔴 Alta**: Tareas urgentes e importantes
+- **🟡 Media**: Tareas importantes sin urgencia
+- **🟢 Baja**: Tareas de rutina o mantenimiento
+
+#### ⏰ Indicadores de Fecha:
+- **📅 Hoy**: Tareas programadas para hoy
+- **⏰ Vencida**: Tareas que han pasado su fecha límite
+- **📆 Futura**: Tareas programadas para más adelante
+
+### 🌙 Modo Oscuro/Claro
+
+- **Cambio dinámico**: Alterna entre temas desde Configuración
+- **Persistencia automática**: Recuerda tu preferencia
+- **Optimización visual**: Mejora la experiencia nocturna
+- **Accesibilidad**: Mejor contraste y legibilidad
+
 ### 📊 Visualización de Estados
 
 #### En la Lista Principal:
@@ -255,12 +292,15 @@ La aplicación cuenta con **GitHub Actions** configurado para despliegue automá
 
 - **Framework**: Angular 18
 - **UI Library**: Angular Material
-- **Styling**: CSS3 + Flexbox/Grid
+- **Styling**: CSS3 + Flexbox/Grid + CSS Variables
+- **Icons**: Material Icons + Font Awesome
 - **State Management**: RxJS + Services
+- **Notifications**: SweetAlert2
 - **Storage**: localStorage
-- **Icons**: Material Icons
+- **Internationalization**: Angular i18n (Spanish locale)
 - **Testing**: Jest + Angular Testing Library
 - **Build Tool**: Angular CLI + Webpack
+- **Deployment**: GitHub Actions + GitHub Pages
 
 ## 📱 Compatibilidad
 

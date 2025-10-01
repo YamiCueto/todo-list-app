@@ -16,7 +16,7 @@
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #212529;
+  color: var(--text-primary);
 }
 
 .month-navigation {
@@ -25,19 +25,30 @@
   gap: 16px;
 }
 
+.month-navigation button {
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.month-navigation button:hover {
+  color: var(--primary-color);
+  background: var(--primary-bg, rgba(77, 171, 247, 0.1));
+}
+
 .month-year {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #495057;
+  color: var(--text-primary);
   min-width: 180px;
   text-align: center;
   text-transform: capitalize;
 }
 
 .calendar-grid {
-  background: white;
+  background: var(--bg-card);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-primary);
   overflow: hidden;
   margin-bottom: 24px;
 }
@@ -45,8 +56,8 @@
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  background: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .weekday {
@@ -54,7 +65,7 @@
   text-align: center;
   font-weight: 600;
   font-size: 0.85rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -67,8 +78,8 @@
 .calendar-day {
   position: relative;
   min-height: 60px;
-  border-bottom: 1px solid #f1f3f4;
-  border-right: 1px solid #f1f3f4;
+  border-bottom: 1px solid var(--border-primary);
+  border-right: 1px solid var(--border-primary);
   padding: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -76,6 +87,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: var(--bg-card);
+  color: var(--text-primary);
 }
 
 .calendar-day:nth-child(7n) {
@@ -83,30 +96,39 @@
 }
 
 .calendar-day:hover {
-  background: rgba(0, 123, 255, 0.05);
+  background: var(--primary-bg, rgba(77, 171, 247, 0.05));
+}
+
+.calendar-day:active {
+  background: var(--primary-bg, rgba(77, 171, 247, 0.15));
+  transform: scale(0.98);
+  transition: all 0.1s ease;
 }
 
 .calendar-day.other-month {
-  color: #adb5bd;
-  background: #fafbfc;
+  color: var(--text-tertiary);
+  background: var(--bg-secondary);
+  opacity: 0.6;
 }
 
 .calendar-day.today {
-  background: rgba(0, 123, 255, 0.1);
-  border: 2px solid #007bff;
+  background: var(--primary-bg, rgba(77, 171, 247, 0.1));
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .calendar-day.selected {
-  background: #007bff;
+  background: var(--primary-color);
   color: white;
 }
 
 .calendar-day.has-todos {
-  background: rgba(40, 167, 69, 0.05);
+  background: var(--success-bg);
 }
 
 .calendar-day.has-todos.selected {
-  background: #007bff;
+  background: var(--primary-color);
 }
 
 .day-number {
@@ -118,7 +140,7 @@
   position: absolute;
   top: 4px;
   right: 4px;
-  background: #28a745;
+  background: var(--success-color);
   color: white;
   border-radius: 50%;
   width: 18px;
@@ -128,20 +150,22 @@
   justify-content: center;
   font-size: 0.7rem;
   font-weight: 600;
+  box-shadow: var(--shadow-sm);
 }
 
 .selected-date-tasks {
-  background: white;
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-primary);
 }
 
 .selected-date-tasks h3 {
   margin: 0 0 16px 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #212529;
+  color: var(--text-primary);
 }
 
 .no-tasks {
@@ -149,7 +173,7 @@
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
-  color: #6c757d;
+  color: var(--text-secondary);
   text-align: center;
 }
 
@@ -158,7 +182,7 @@
   width: 48px;
   height: 48px;
   margin-bottom: 12px;
-  color: #dee2e6;
+  color: var(--text-tertiary);
 }
 
 .task-item {
@@ -166,7 +190,7 @@
   align-items: flex-start;
   gap: 12px;
   padding: 12px 0;
-  border-bottom: 1px solid #f1f3f4;
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .task-item:last-child {
@@ -181,19 +205,19 @@
 }
 
 .task-status.status-pending {
-  background: #6c757d;
+  background: var(--status-pending);
 }
 
 .task-status.status-in_progress {
-  background: #fd7e14;
+  background: var(--status-progress);
 }
 
 .task-status.status-completed {
-  background: #28a745;
+  background: var(--status-completed);
 }
 
 .task-status.status-suspended {
-  background: #ffc107;
+  background: var(--status-suspended);
 }
 
 .task-content {
@@ -204,19 +228,19 @@
   margin: 0 0 4px 0;
   font-size: 1rem;
   font-weight: 500;
-  color: #212529;
+  color: var(--text-primary);
 }
 
 .task-content p {
   margin: 0 0 8px 0;
   font-size: 0.85rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   line-height: 1.4;
 }
 
 .task-time {
   font-size: 0.75rem;
-  color: #adb5bd;
+  color: var(--text-tertiary);
 }
 
 /* Mobile responsive */
@@ -261,5 +285,61 @@
 
   .selected-date-tasks {
     padding: 16px;
+  }
+}
+
+/* Estilos específicos para modo oscuro */
+:host-context(.dark-theme) .calendar-day.today {
+  background: var(--primary-bg, rgba(77, 171, 247, 0.15));
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+:host-context(.dark-theme) .calendar-day.selected {
+  background: var(--primary-color);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+:host-context(.dark-theme) .calendar-day:hover:not(.selected) {
+  background: var(--bg-tertiary);
+}
+
+:host-context(.dark-theme) .todo-indicator {
+  background: var(--success-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+:host-context(.dark-theme) .calendar-day.has-todos:not(.selected) {
+  background: var(--success-bg);
+  border-color: var(--success-color);
+}
+
+/* Animaciones mejoradas para el calendario */
+.calendar-day {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.calendar-day:hover {
+  transform: scale(1.02);
+}
+
+.calendar-day.selected {
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+.todo-indicator {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

@@ -49,8 +49,7 @@
             </button>
             <button
               type="button"
-              mat-raised-button
-              color="primary"
+              mat-button
               class="status-btn"
               [class.active]="taskForm.get('status')?.value === TodoStatus.IN_PROGRESS"
               (click)="taskForm.get('status')?.setValue(TodoStatus.IN_PROGRESS)">

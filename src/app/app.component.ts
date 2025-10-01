@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Todo, TodoService } from './services/todo.service';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,20 @@ import { Todo, TodoService } from './services/todo.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'todo-list-app';
   currentTab = 'tasks';
   showNewTaskModal = false;
 
-  constructor(private todoService: TodoService) {}
+  constructor(
+    private todoService: TodoService,
+    private themeService: ThemeService
+  ) {}
+
+  ngOnInit(): void {
+    // El servicio de tema se inicializa automáticamente y carga el tema guardado
+    // No necesitamos hacer nada más aquí
+  }
 
   onTabChanged(tab: string) {
     this.currentTab = tab;

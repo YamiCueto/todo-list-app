@@ -13,13 +13,14 @@
 }
 
 .task-detail-container {
-  background: white;
+  background: var(--bg-card);
   border-radius: 16px;
   width: 100%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-primary);
   animation: slideUp 0.3s ease-out;
 }
 
@@ -38,23 +39,25 @@
   display: flex;
   align-items: center;
   padding: 20px 24px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--border-primary);
   gap: 16px;
+  background: var(--bg-card);
 }
 
 .task-detail-header h2 {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: #212529;
+  color: var(--text-primary);
 }
 
 .back-btn {
-  color: #6c757d;
+  color: var(--text-secondary);
 }
 
 .task-detail-content {
   padding: 24px;
+  background: var(--bg-card);
 }
 
 .form-group {
@@ -65,12 +68,48 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #495057;
+  color: var(--text-primary);
   font-size: 0.9rem;
 }
 
 .full-width {
   width: 100%;
+}
+
+/* Estilos específicos para inputs en modo oscuro */
+:host-context(.dark-theme) .mat-form-field input,
+:host-context(.dark-theme) .mat-form-field textarea {
+  color: white !important;
+  background-color: transparent !important;
+}
+
+:host-context(.dark-theme) .mat-form-field-label {
+  color: #b3b3b3 !important;
+}
+
+:host-context(.dark-theme) .mat-form-field-outline {
+  color: #404040 !important;
+}
+
+:host-context(.dark-theme) .mat-form-field.mat-focused .mat-form-field-outline-thick {
+  color: var(--primary-color) !important;
+}
+
+:host-context(.dark-theme) .mat-form-field.mat-focused .mat-form-field-label {
+  color: var(--primary-color) !important;
+}
+
+/* Force text color for all inputs */
+.task-detail-container input,
+.task-detail-container textarea {
+  color: var(--text-primary) !important;
+  background-color: transparent !important;
+}
+
+.task-detail-container input::placeholder,
+.task-detail-container textarea::placeholder {
+  color: var(--text-tertiary) !important;
+  opacity: 0.7;
 }
 
 .status-buttons {
@@ -85,24 +124,49 @@
   border-radius: 8px;
   text-transform: none;
   font-weight: 500;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  position: relative;
 }
 
 .status-btn:not(.active) {
-  background: #f5f5f5;
-  color: #666;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-color: var(--border-primary);
 }
 
-.status-btn.active,
-.status-btn[color="primary"] {
-  background: #1976d2 !important;
+.status-btn:hover:not(.active) {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+}
+
+.status-btn.active {
+  background: var(--primary-color) !important;
   color: white !important;
-  border-color: #1976d2 !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.status-btn.active::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
 }
 
 .task-detail-actions {
   padding: 20px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--border-primary);
+  background: var(--bg-card);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -115,7 +179,7 @@
   font-weight: 600;
   font-size: 16px;
   text-transform: none;
-  background: #1976d2 !important;
+  background: var(--primary-color) !important;
   color: white !important;
 }
 
@@ -125,9 +189,9 @@
   border-radius: 8px;
   font-weight: 500;
   text-transform: none;
-  background: #f5f5f5;
-  color: #666;
-  border: 1px solid #e0e0e0;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
 }
 
 .delete-btn {
@@ -136,7 +200,7 @@
   border-radius: 8px;
   font-weight: 500;
   text-transform: none;
-  color: #d32f2f;
+  color: var(--error-color);
   background: transparent;
   border: none;
 }

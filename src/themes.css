@@ -1,0 +1,370 @@
+/* ===========================
+   TEMAS GLOBALES - MODO CLARO Y OSCURO
+   =========================== */
+
+/* Variables CSS para el modo claro (por defecto) */
+:root,
+.light-theme {
+  /* Colores principales */
+  --primary-color: #007bff;
+  --primary-dark: #0056b3;
+  --primary-light: #66b3ff;
+
+  /* Colores de fondo */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+
+  /* Colores de texto */
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-tertiary: #adb5bd;
+  --text-muted: #dee2e6;
+
+  /* Colores de borde */
+  --border-primary: #e9ecef;
+  --border-secondary: #dee2e6;
+  --border-focus: #007bff;
+
+  /* Colores de estado */
+  --success-color: #28a745;
+  --success-bg: rgba(40, 167, 69, 0.1);
+  --warning-color: #ffc107;
+  --warning-bg: rgba(255, 193, 7, 0.1);
+  --error-color: #dc3545;
+  --error-bg: rgba(220, 53, 69, 0.1);
+  --info-color: #17a2b8;
+  --info-bg: rgba(23, 162, 184, 0.1);
+
+  /* Colores de status de tareas */
+  --status-pending: #6c757d;
+  --status-progress: #fd7e14;
+  --status-completed: #28a745;
+  --status-suspended: #ffc107;
+
+  /* Efectos y sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+  /* Gradientes */
+  --gradient-primary: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  --gradient-card: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+  --gradient-completed: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Variables CSS para el modo oscuro */
+.dark-theme {
+  /* Colores principales */
+  --primary-color: #4dabf7;
+  --primary-dark: #339af0;
+  --primary-light: #74c0fc;
+
+  /* Colores de fondo */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #404040;
+  --bg-card: #2d2d2d;
+  --bg-input: #404040;
+
+  /* Colores de texto */
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-tertiary: #808080;
+  --text-muted: #666666;
+
+  /* Colores de borde */
+  --border-primary: #404040;
+  --border-secondary: #4d4d4d;
+  --border-focus: #4dabf7;
+
+  /* Colores de estado (ajustados para modo oscuro) */
+  --success-color: #51cf66;
+  --success-bg: rgba(81, 207, 102, 0.15);
+  --warning-color: #ffd43b;
+  --warning-bg: rgba(255, 212, 59, 0.15);
+  --error-color: #ff6b6b;
+  --error-bg: rgba(255, 107, 107, 0.15);
+  --info-color: #74c0fc;
+  --info-bg: rgba(116, 192, 252, 0.15);
+
+  /* Colores de status de tareas (modo oscuro) */
+  --status-pending: #b3b3b3;
+  --status-progress: #ff922b;
+  --status-completed: #51cf66;
+  --status-suspended: #ffd43b;
+
+  /* Efectos y sombras (más sutiles en modo oscuro) */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.35);
+
+  /* Gradientes (modo oscuro) */
+  --gradient-primary: linear-gradient(135deg, #4dabf7 0%, #339af0 100%);
+  --gradient-card: linear-gradient(145deg, #2d2d2d 0%, #404040 100%);
+  --gradient-completed: linear-gradient(145deg, #2d2d2d 0%, #262626 100%);
+}
+
+/* ===========================
+   TRANSICIONES SUAVES
+   =========================== */
+
+/* Aplicar transiciones suaves a todos los elementos que cambien con el tema */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease !important;
+}
+
+/* ===========================
+   ESTILOS GLOBALES CON VARIABLES
+   =========================== */
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cards y containers */
+.card,
+.mat-card,
+.task-card,
+.stat-card,
+.settings-section {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Inputs y form controls */
+.mat-form-field,
+.mat-input-element,
+.mat-select,
+.mat-option {
+  background-color: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-primary) !important;
+}
+
+/* Estilos globales forzados para inputs en modo oscuro */
+.dark-theme input,
+.dark-theme textarea,
+.dark-theme .mat-input-element,
+.dark-theme .mat-form-field input,
+.dark-theme .mat-form-field textarea {
+  color: white !important;
+  background-color: transparent !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.dark-theme input:focus,
+.dark-theme textarea:focus {
+  color: white !important;
+  background-color: transparent !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder {
+  color: #808080 !important;
+  opacity: 0.8 !important;
+}
+
+.dark-theme .mat-form-field-label {
+  color: #b3b3b3 !important;
+}
+
+.dark-theme .mat-form-field.mat-focused .mat-form-field-label {
+  color: var(--primary-color) !important;
+}
+
+/* Material Design overrides para modo oscuro */
+.dark-theme .mat-form-field-label,
+.dark-theme .mat-form-field-placeholder {
+  color: var(--text-secondary) !important;
+}
+
+.dark-theme .mat-form-field-underline {
+  background-color: var(--border-primary) !important;
+}
+
+.dark-theme .mat-form-field-ripple {
+  background-color: var(--primary-color) !important;
+}
+
+.dark-theme .mat-form-field-outline {
+  color: var(--border-primary) !important;
+}
+
+.dark-theme .mat-form-field-outline-thick {
+  color: var(--primary-color) !important;
+}
+
+.dark-theme .mat-input-element,
+.dark-theme .mat-form-field input,
+.dark-theme .mat-form-field textarea {
+  color: var(--text-primary) !important;
+  background-color: transparent !important;
+}
+
+.dark-theme .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: var(--border-primary) !important;
+}
+
+.dark-theme .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: var(--primary-color) !important;
+}
+
+.dark-theme .mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: var(--primary-color) !important;
+}
+
+.dark-theme .mat-error {
+  color: var(--error-color) !important;
+}
+
+/* Fix para inputs específicos */
+.dark-theme input,
+.dark-theme textarea {
+  color: var(--text-primary) !important;
+  background-color: transparent !important;
+}
+
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder {
+  color: var(--text-tertiary) !important;
+  opacity: 0.7;
+}
+
+/* Botones */
+.dark-theme .mat-button,
+.dark-theme .mat-raised-button,
+.dark-theme .mat-fab,
+.dark-theme .mat-mini-fab {
+  color: var(--text-primary) !important;
+}
+
+.dark-theme .mat-icon-button {
+  color: var(--text-secondary) !important;
+}
+
+.dark-theme .mat-raised-button[color="primary"] {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.dark-theme .mat-stroked-button {
+  color: var(--text-primary) !important;
+  border-color: var(--border-primary) !important;
+}
+
+.dark-theme .mat-button[color="warn"],
+.dark-theme .mat-raised-button[color="warn"] {
+  color: var(--error-color) !important;
+}
+
+/* Iconos */
+.dark-theme .mat-icon {
+  color: inherit !important;
+}
+
+/* Dividers y separadores */
+.dark-theme .mat-divider {
+  border-color: var(--border-primary) !important;
+}
+
+/* Spinners y progress */
+.dark-theme .mat-progress-spinner circle,
+.dark-theme .mat-spinner circle {
+  stroke: var(--primary-color) !important;
+}
+
+/* Navegación inferior */
+.dark-theme .bottom-nav {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-primary) !important;
+}
+
+/* FAB Button */
+.dark-theme .fab-button {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Toggle switches */
+.dark-theme .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: var(--primary-color) !important;
+}
+
+.dark-theme .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: rgba(77, 171, 247, 0.5) !important;
+}
+
+/* Scrollbars para modo oscuro */
+.dark-theme ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark-theme ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* ===========================
+   ANIMACIONES ESPECÍFICAS DEL TEMA
+   =========================== */
+
+/* Animación de cambio de tema */
+.theme-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glow effect para modo oscuro */
+.dark-theme .primary-glow {
+  box-shadow: 0 0 20px rgba(77, 171, 247, 0.3);
+}
+
+/* ===========================
+   RESPONSIVO
+   =========================== */
+
+@media (max-width: 767px) {
+  .dark-theme {
+    /* En móviles, el fondo puede ser un poco más suave */
+    --bg-primary: #1f1f1f;
+  }
+}
+
+/* ===========================
+   UTILIDADES DE TEMA
+   =========================== */
+
+/* Clases de utilidad para forzar colores */
+.text-theme-primary { color: var(--text-primary) !important; }
+.text-theme-secondary { color: var(--text-secondary) !important; }
+.text-theme-tertiary { color: var(--text-tertiary) !important; }
+
+.bg-theme-primary { background-color: var(--bg-primary) !important; }
+.bg-theme-secondary { background-color: var(--bg-secondary) !important; }
+.bg-theme-card { background-color: var(--bg-card) !important; }
+
+.border-theme-primary { border-color: var(--border-primary) !important; }
+.border-theme-secondary { border-color: var(--border-secondary) !important; }

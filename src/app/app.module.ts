@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +18,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+// Import locale data
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
@@ -28,6 +32,9 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { FabButtonComponent } from './components/fab-button/fab-button.component';
 import { RouterModule, Routes } from '@angular/router';
+
+// Register the locale
+registerLocaleData(localeEs);
 
 const appRoutes: Routes = [
   { path: '', component: TodoListComponent },
@@ -67,7 +74,9 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

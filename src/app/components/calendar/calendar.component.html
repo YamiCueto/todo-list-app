@@ -46,7 +46,7 @@
 
   <!-- Selected date tasks -->
   <div *ngIf="selectedDate" class="selected-date-tasks">
-    <h3>Tareas para {{ selectedDate | date:'fullDate':'':'es-ES' }}</h3>
+    <h3>Tareas para {{ selectedDate | date:'fullDate':'':'es' }}</h3>
     <div *ngIf="getSelectedDateTodos().length === 0" class="no-tasks">
       <mat-icon>event_available</mat-icon>
       <p>No hay tareas para este día</p>
